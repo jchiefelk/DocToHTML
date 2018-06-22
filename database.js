@@ -1,27 +1,24 @@
-// Requires official Node.js MongoDB Driver 3.0.0+
-var mongodb = require("mongodb");
-
-var client = mongodb.MongoClient;
-var url = "mongodb://host:port/";
-
-client.connect(url, function (err, client) {
-    
-    var db = client.db("articles");
-    var collection = db.collection("finance");
-    
-    var query = {};
-    
-    var cursor = collection.find(query);
-    
-    cursor.forEach(
-        function(doc) {
-            console.log(doc);
-        }, 
-        function(err) {
-            client.close();
-        }
-    );
-    
-    // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
-    
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+//
+// For a Single Lookup
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("articles");
+  dbo.collection("finance").findOne({}, function(err, result) {
+    if (err) throw err;
+    // console.log(result);
+    db.close();
+  });
+});
+// To read the entire collection
+//
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("articles");
+  dbo.collection("finance").find({}).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
 });
