@@ -5,7 +5,7 @@
 	"dependencies": {
 		"express": "^4.16.3",
 		"mammoth": "^1.4.6",
-		"mongodb": "^3.0.10",
+		"mongodb": "^3.1.13",
 		"node-fetch": "^2.1.2"
 	}
 }
